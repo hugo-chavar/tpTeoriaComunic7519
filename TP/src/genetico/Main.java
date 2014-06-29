@@ -5,10 +5,11 @@ import java.util.ArrayList;
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.println("TP de algoritmos geneticos.");
+		System.out.println("TP de Redes Complejas.");
 		System.out.println("Alumnos:");
-		System.out.println("	Carina Greger");
+		System.out.println("	Stephanie Abigail Zurita");
 		System.out.println("	Hugo Chavar");
+		System.out.println("	Diego Meller");
 		System.out.println();
 		System.out.println();
 		
@@ -36,8 +37,8 @@ public class Main {
 			double indMax = pobl.getBestIndividuo();
 
 			String res = String.format("%9s", String.format("%.5f", indMedio))
-					+ "	" + String.format("%9s", String.format("%.5f", indMax)) 
-					+ "	" + String.format("%9s", String.format("%.5f", indMin));
+					+ "\t " + String.format("%9s", String.format("%.5f", indMax)) 
+					+ "\t " + String.format("%9s", String.format("%.5f", indMin));
 			estAptitudPoblaciones.add(res);
 
 			if (!pobl.esCondicionDeFin()) {
@@ -50,11 +51,11 @@ public class Main {
 		System.out.println();
 
 		System.out
-				.println("Gen.	Aptitud Media	Aptitud Peor	Aptitud Mejor Individuo");
+				.println("Gen.\t Aptitud Media\t Aptitud Peor\t Aptitud Mejor\t Individuo");
 
 		int i;
 		for (i = 0; i < estAptitudPoblaciones.size(); i++) {
-			System.out.println(i + " 	" + estAptitudPoblaciones.get(i));
+			System.out.println(i + "\t " + estAptitudPoblaciones.get(i));
 		}
 
 	}
