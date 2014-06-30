@@ -20,7 +20,7 @@ public class Main {
 		double minimaVariacionEntreGeneraciones = 0.00000001;
 		
 		//Creo la generacion 0 de la poblacion
-		Poblacion pobl = new Poblacion(cantidadIndividuosEnPoblacion, tasaDeSeleccion, tasaDeMutacion, minimaVariacionEntreGeneraciones);
+		Poblacion pobl = new Poblacion(cantidadIndividuosEnPoblacion, tasaDeSeleccion, minimaVariacionEntreGeneraciones);
 		ArrayList<Double> aptitudPoblaciones = new ArrayList<Double>();
 		ArrayList<String> estAptitudPoblaciones = new ArrayList<String>();
 
@@ -28,7 +28,6 @@ public class Main {
 
 			pobl.seleccion();
 			pobl.selectReproduccion();
-			pobl.mutacion();
 			aptitudPoblaciones.add(pobl.getAptitudPoblacion());
 			pobl.calcAptitudPoblacion();
 

@@ -11,17 +11,14 @@ public class Poblacion {
 	private ArrayList<Individuo> listaIndividuos;
 	private int tamano;
 	private double porcSeleccion;
-	private double porcMutacion;
 	private double aptitudPoblacion;
 	private double aptitudAnterior;
 	private double condicionDeFin;
 
 	// Constructor
-	Poblacion(int tamano, double porcSeleccion, double porcMutacion,
-			double condDeFin) {
+	Poblacion(int tamano, double porcSeleccion, double condDeFin) {
 		this.tamano = tamano;
 		this.porcSeleccion = porcSeleccion;
-		this.porcMutacion = porcMutacion;
 		this.aptitudPoblacion = 0;
 		this.condicionDeFin = condDeFin;
 
@@ -29,7 +26,7 @@ public class Poblacion {
 		listaIndividuos = new ArrayList<Individuo>();
 		int i;
 		for (i = 0; i < tamano; i++) {
-			listaIndividuos.add(new Individuo(this.porcMutacion));
+			listaIndividuos.add(new Individuo());
 		}
 		this.calcAptitudPoblacion();
 	}
@@ -112,13 +109,6 @@ public class Poblacion {
 		double check = Math.abs(1 - (aptitud / aAnterior));
 
 		return (check >= limit);
-	}
-
-	public void mutacion() {
-		int i;
-		for (i = 0; i < listaIndividuos.size(); i++) {
-			listaIndividuos.get(i).mutar();
-		}
 	}
 
 	public void mostrarIndividuos() {
