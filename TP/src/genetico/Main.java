@@ -16,7 +16,6 @@ public class Main {
 		//Defino parametros
 		int cantidadIndividuosEnPoblacion = 100;
 		double tasaDeSeleccion = 0.1; //tasa de reproduccion es el mismo nro
-		double tasaDeMutacion = 0.01;
 		double minimaVariacionEntreGeneraciones = 0.00000001;
 		
 		//Creo la generacion 0 de la poblacion
