@@ -1,0 +1,4 @@
+CantidadIndividuosEnPoblacion = 10
+TasaDeSeleccion = 0.2
+TasaDeMutacion = 0.02
+MinimaVariacionEntreGeneraciones = 0.00000005
