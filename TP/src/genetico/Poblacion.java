@@ -163,4 +163,8 @@ public class Poblacion {
 		return ind;
 	}
 
+	public int getCantidadIndividuo() {
+		return listaIndividuos.size();
+	}
+
 }

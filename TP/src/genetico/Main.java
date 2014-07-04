@@ -31,6 +31,7 @@ public class Main {
 		Poblacion pobl = new Poblacion(cantidadIndividuosEnPoblacion,
 				tasaDeSeleccion, tasaDeMutacion,
 				minimaVariacionEntreGeneraciones);
+		
 		ArrayList<Double> aptitudPoblaciones = new ArrayList<Double>();
 		ArrayList<String> estAptitudPoblaciones = new ArrayList<String>();
 
@@ -45,12 +46,15 @@ public class Main {
 			double indMedio = pobl.getAptitudPoblacion();
 			double indMin = pobl.getLeastIndividuo();
 			double indMax = pobl.getBestIndividuo();
+			int cantIndividuos = pobl.getCantidadIndividuo();
 
 			String res = String.format("%9s", String.format("%.5f", indMedio))
 					+ SEPARADOR
 					+ String.format("%9s", String.format("%.5f", indMax))
 					+ SEPARADOR
-					+ String.format("%9s", String.format("%.5f", indMin));
+					+ String.format("%9s", String.format("%.5f", indMin))
+					+ SEPARADOR
+					+ String.format("%d", cantIndividuos);
 			estAptitudPoblaciones.add(res);
 
 			if (!pobl.esCondicionDeFin()) {
@@ -73,10 +77,10 @@ public class Main {
 					new FileOutputStream(fileName + ".txt"), "utf-8"));
 			System.out
 			.println("Gen."+ SEPARADOR +"Aptitud Media" + SEPARADOR
-					+"Aptitud Peor"+ SEPARADOR +"Aptitud Mejor"+ SEPARADOR + "Individuo");
+					+"Aptitud Peor"+ SEPARADOR +"Aptitud Mejor"+ SEPARADOR + "Individuos");
 			
 			writer.write("Gen."+ SEPARADOR +"Aptitud Media" + SEPARADOR
-					+"Aptitud Peor"+ SEPARADOR +"Aptitud Mejor"+ SEPARADOR + "Individuo");
+					+"Aptitud Peor"+ SEPARADOR +"Aptitud Mejor"+ SEPARADOR + "Individuos");
 			writer.write("\r\n");
 			int i;
 			for (i = 0; i < estAptitudPoblaciones.size(); i++) {
