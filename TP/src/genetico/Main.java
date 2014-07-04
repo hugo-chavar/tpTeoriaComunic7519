@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Main {
-
+	static final String SEPARADOR = "\t ";
+	
 	public static void main(String[] args) {
 		System.out.println("TP de Redes Complejas / Sistemas Multiagente");
 		System.out.println("Alumnos:");
@@ -24,7 +25,7 @@ public class Main {
 		int cantidadIndividuosEnPoblacion = 10;
 		double tasaDeSeleccion = 0.1; // tasa de reproduccion es el mismo nro
 		double tasaDeMutacion = 0.01;
-		double minimaVariacionEntreGeneraciones = 0.00000001;
+		double minimaVariacionEntreGeneraciones = 0.0000001;
 
 		// Creo la generacion 0 de la poblacion
 		Poblacion pobl = new Poblacion(cantidadIndividuosEnPoblacion,
@@ -46,9 +47,9 @@ public class Main {
 			double indMax = pobl.getBestIndividuo();
 
 			String res = String.format("%9s", String.format("%.5f", indMedio))
-					+ "\t "
+					+ SEPARADOR
 					+ String.format("%9s", String.format("%.5f", indMax))
-					+ "\t "
+					+ SEPARADOR
 					+ String.format("%9s", String.format("%.5f", indMin));
 			estAptitudPoblaciones.add(res);
 
@@ -71,14 +72,16 @@ public class Main {
 			writer = new BufferedWriter(new OutputStreamWriter(
 					new FileOutputStream(fileName + ".txt"), "utf-8"));
 			System.out
-			.println("Gen.\t Aptitud Media\t Aptitud Peor\t Aptitud Mejor\t Individuo");
+			.println("Gen."+ SEPARADOR +"Aptitud Media" + SEPARADOR
+					+"Aptitud Peor"+ SEPARADOR +"Aptitud Mejor"+ SEPARADOR + "Individuo");
 			
-			writer.write("Gen.\t Aptitud Media\t Aptitud Peor\t Aptitud Mejor\t Individuo");
+			writer.write("Gen."+ SEPARADOR +"Aptitud Media" + SEPARADOR
+					+"Aptitud Peor"+ SEPARADOR +"Aptitud Mejor"+ SEPARADOR + "Individuo");
 			writer.write("\r\n");
 			int i;
 			for (i = 0; i < estAptitudPoblaciones.size(); i++) {
-				System.out.println(i + "\t " + estAptitudPoblaciones.get(i));
-				writer.write(i + "\t " + estAptitudPoblaciones.get(i));
+				System.out.println(i + SEPARADOR + estAptitudPoblaciones.get(i));
+				writer.write(i + SEPARADOR + estAptitudPoblaciones.get(i));
 				writer.write("\r\n");
 			}
 		} catch (IOException ex) {
