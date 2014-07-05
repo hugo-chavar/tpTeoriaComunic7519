@@ -35,6 +35,10 @@ public class Main {
 		ArrayList<Double> aptitudPoblaciones = new ArrayList<Double>();
 		ArrayList<String> estAptitudPoblaciones = new ArrayList<String>();
 
+		ArrayList<String> aptitudMediaPoblaciones = new ArrayList<String>();
+		ArrayList<String> aptitudPeorPoblaciones = new ArrayList<String>();
+		ArrayList<String> aptitudMejorPoblaciones = new ArrayList<String>();
+		
 		while (true) {
 
 			pobl.seleccion();
@@ -57,6 +61,10 @@ public class Main {
 					+ String.format("%d", cantIndividuos);
 			estAptitudPoblaciones.add(res);
 
+			aptitudMediaPoblaciones.add(String.format("%.5f", indMedio));
+			aptitudPeorPoblaciones.add(String.format("%.5f", indMax));
+			aptitudMejorPoblaciones.add(String.format("%.5f", indMin));
+			
 			if (!pobl.esCondicionDeFin()) {
 				break;
 			}
@@ -97,6 +105,8 @@ public class Main {
 			} catch (Exception ex) {
 			}
 		}
-
+		
+		//Grafico grafico = new Grafico(aptitudMediaPoblaciones, aptitudPeorPoblaciones, aptitudMejorPoblaciones);
+		//grafico.mostrarGrafico(aptitudMediaPoblaciones, aptitudPeorPoblaciones, aptitudMejorPoblaciones);
 	}
 }
