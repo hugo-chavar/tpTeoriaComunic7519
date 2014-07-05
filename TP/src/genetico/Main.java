@@ -106,6 +106,9 @@ public class Main {
 			}
 		}
 		
+		/* Comentado ya que la ruta para ejecutar el octave es que la que me figura a mi
+		 * Si lo quieren probar, cambien la ruta en Grafico ejecutar 
+		 */
 		//Grafico grafico = new Grafico(aptitudMediaPoblaciones, aptitudPeorPoblaciones, aptitudMejorPoblaciones);
 		//grafico.mostrarGrafico(aptitudMediaPoblaciones, aptitudPeorPoblaciones, aptitudMejorPoblaciones);
 	}

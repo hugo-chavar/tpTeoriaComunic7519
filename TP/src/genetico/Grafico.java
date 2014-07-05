@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Grafico {
 
@@ -25,7 +26,7 @@ public class Grafico {
 	
 	public void mostrarGrafico(ArrayList<String> aptitudMedia, ArrayList<String> aptitudPeor, ArrayList<String> aptitudMejor){
 		//limite Aptitud=10000 porque lo máximo de aptitud que se obtuve fue en el rango [9000,10000)
-		escribirArchivoSalida(fileName1, 10000); 
+		escribirArchivoSalida(fileName1, getAptitudMaxima()); 
 		escribirArchivoSalida(fileName2, 200); 
 		ejecutar();
 	}
@@ -38,7 +39,7 @@ public class Grafico {
 	 * 		fileName = nombre del archivo salida, coindice con el nombre de la funcion
 	 * 		limiteAptitudMaximo = es el valor máximo para el eje y (en este caso aptitud)
 	 */
-	private void escribirArchivoSalida(String fileName, int limiteAptitudMaximo){
+	private void escribirArchivoSalida(String fileName, double limiteAptitudMaximo){
 		int cantGeneraciones = aptitudMedia.size();
 		String output = "function "+ fileName+ "\n";
 		BufferedWriter writer = null;
@@ -76,7 +77,7 @@ public class Grafico {
 		return outputGen;
 	}
 	
-	private static String crearComandoAptitud(String nameAptitud, ArrayList<String> aptitud){
+	private String crearComandoAptitud(String nameAptitud, ArrayList<String> aptitud){
 		String outputAptitud = nameAptitud+"=[\n";
 		for (int i = 0; i< aptitud.size(); i++)
 			outputAptitud+= aptitud.get(i).replace(",", ".") + "\n";
@@ -84,7 +85,11 @@ public class Grafico {
 		return outputAptitud;
 	}
 	
-	private static void ejecutar(){
+	/*
+	 * Ejecuta octave, al abrirse consola ingresar el nombre del archivo .m para generar
+	 * el grafico
+	 */
+	private void ejecutar(){
                         
         Runtime r = Runtime.getRuntime();
         String cmd[] = {"cmd.exe","/c start C:\\Software\\Octave-3.6.4\\bin\\octave-3.6.4"};
@@ -95,4 +100,21 @@ public class Grafico {
 		}
 	}
 
+	/* 
+	 * Se obtiene la maxima aptitud generada para poder utilizarla como limite maximo 
+	 * del eje Y (Aptitud). Se lo incrementa en 100 para que se vea bien el limite
+	 */
+	private double getAptitudMaxima(){
+		double aptitudMaximaMedia = Double.parseDouble(aptitudMedia.get(0).replace(",", "."));
+		double aptitudMaximaPeor = Double.parseDouble(aptitudPeor.get(0).replace(",", "."));
+		double aptitudMaximaMejor = Double.parseDouble(aptitudMejor.get(0).replace(",", "."));
+	
+		ArrayList<Double> values = new ArrayList<Double>();
+		values.add(aptitudMaximaMedia);
+		values.add(aptitudMaximaMejor);
+		values.add(aptitudMaximaPeor);
+		
+		Collections.sort(values);
+		return Math.ceil(values.get(values.size()-1)) + 100;
+	}
 }
