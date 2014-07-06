@@ -7,13 +7,15 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import javax.sound.midi.Patch;
+
 public class Grafico {
 
-	private static final String fileName1 = "graficoEvolucion";
+	private static final String fileName1 = "graficoEvolucion.m";
 	/*utilizo otra salida donde se cambia el limite maximo del eje, de esa forma
 	 * se aprecia mas la convergencia*/
-	private static final String fileName2 = "graficoEvolucionZoom";
-	private static final String fileExtension = ".m";
+	private static final String fileName2 = "graficoEvolucionZoom.m";
+	private String path;
 	private ArrayList<String> aptitudMedia;
 	private ArrayList<String> aptitudPeor;
 	private ArrayList<String> aptitudMejor;
@@ -22,12 +24,16 @@ public class Grafico {
 		this.aptitudMedia = aptitudMedia;
 		this.aptitudPeor = aptitudPeor;
 		this.aptitudMejor = aptitudMejor;
+		this.path = getPath();
 	}
 	
 	public void mostrarGrafico(ArrayList<String> aptitudMedia, ArrayList<String> aptitudPeor, ArrayList<String> aptitudMejor){
 		//limite Aptitud=10000 porque lo máximo de aptitud que se obtuve fue en el rango [9000,10000)
-		escribirArchivoSalida(fileName1, getAptitudMaxima()); 
-		escribirArchivoSalida(fileName2, 200); 
+        String path = "";
+        path += getClass().getProtectionDomain().getCodeSource().getLocation().toString();
+        path = path.substring(6).replace('/', '\\');
+		escribirArchivoSalida(path+fileName1, getAptitudMaxima()); 
+		escribirArchivoSalida(path+fileName2, 200); 
 		ejecutar();
 	}
 
@@ -44,7 +50,7 @@ public class Grafico {
 		String output = "";
 		BufferedWriter writer = null;
 		try {
-			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName + fileExtension)));
+			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName)));
 			output += crearComandoGeneracion(cantGeneraciones);
 			output += crearComandoAptitud("aptitudmedia", aptitudMedia);
 			output += crearComandoAptitud("aptitudpeor", aptitudPeor);
@@ -91,9 +97,6 @@ public class Grafico {
 	private void ejecutar(){
                         
         Runtime r = Runtime.getRuntime();
-        String path = "";
-        path += getClass().getProtectionDomain().getCodeSource().getLocation().toString();
-        path = path.substring(6).replace('/', '\\');
         String file = "";
         file += "graficoEvolucion.m"; // o graficoEvolucionZoom.m depende cual queremos correr, deben estar en el path correcto
         // Por ejemplo en mi compu es: C:\Users\Diego\Documents\GitHub\tpTeoriaComunic7519\TP\bin\graficoEvolucionZoom.m
@@ -123,5 +126,12 @@ public class Grafico {
 		
 		Collections.sort(values);
 		return Math.ceil(values.get(values.size()-1)) + 100;
+	}
+	
+	private String getPath(){
+        String path = "";
+        path += getClass().getProtectionDomain().getCodeSource().getLocation().toString();
+        path = path.substring(6).replace('/', '\\');
+        return path;
 	}
 }
