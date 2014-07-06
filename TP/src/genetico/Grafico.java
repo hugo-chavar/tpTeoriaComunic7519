@@ -41,7 +41,7 @@ public class Grafico {
 	 */
 	private void escribirArchivoSalida(String fileName, double limiteAptitudMaximo){
 		int cantGeneraciones = aptitudMedia.size();
-		String output = "function "+ fileName+ "\n";
+		String output = "";
 		BufferedWriter writer = null;
 		try {
 			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName + fileExtension)));
@@ -60,7 +60,6 @@ public class Grafico {
 			 */
 			String axis = "axis([0,"+cantGeneraciones+",-100,"+limiteAptitudMaximo+"]);\n";
 			output += axis + "xlabel('Generacion');\nylabel('Aptitud');\nlegend('Aptitud Media', 'Aptitud Peor', 'Aptitud Mejor');\n";
-			output += "endfunction\n";
 			writer.write(output);
 			writer.close();
 		} catch (IOException e) {
@@ -96,7 +95,7 @@ public class Grafico {
         path += getClass().getProtectionDomain().getCodeSource().getLocation().toString();
         path = path.substring(6).replace('/', '\\');
         String file = "";
-        file += "graficoEvolucionZoom.m"; // o graficoEvolucion.m depende cual queremos correr, deben estar en el path correcto
+        file += "graficoEvolucion.m"; // o graficoEvolucionZoom.m depende cual queremos correr, deben estar en el path correcto
         // Por ejemplo en mi compu es: C:\Users\Diego\Documents\GitHub\tpTeoriaComunic7519\TP\bin\graficoEvolucionZoom.m
         file = path + file;
         System.out.println(file);
