@@ -92,7 +92,15 @@ public class Grafico {
 	private void ejecutar(){
                         
         Runtime r = Runtime.getRuntime();
-        String cmd[] = {"cmd.exe","/c start C:\\Software\\Octave-3.6.4\\bin\\octave-3.6.4"};
+        String path = "";
+        path += getClass().getProtectionDomain().getCodeSource().getLocation().toString();
+        path = path.substring(6).replace('/', '\\');
+        String file = "";
+        file += "graficoEvolucionZoom.m"; // o graficoEvolucion.m depende cual queremos correr, deben estar en el path correcto
+        // Por ejemplo en mi compu es: C:\Users\Diego\Documents\GitHub\tpTeoriaComunic7519\TP\bin\graficoEvolucionZoom.m
+        file = path + file;
+        System.out.println(file);
+        String cmd[] = {"cmd.exe","/c start C:\\Software\\Octave-3.6.4\\bin\\octave.exe -q  --persist " + file};
 		try {
 			r.exec(cmd);
 		} catch (IOException e) {
