@@ -7,8 +7,6 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import javax.sound.midi.Patch;
-
 public class Grafico {
 
 	private static final String fileName1 = "graficoEvolucion.m";
@@ -28,10 +26,6 @@ public class Grafico {
 	}
 	
 	public void mostrarGrafico(ArrayList<String> aptitudMedia, ArrayList<String> aptitudPeor, ArrayList<String> aptitudMejor){
-		//limite Aptitud=10000 porque lo máximo de aptitud que se obtuve fue en el rango [9000,10000)
-        String path = "";
-        path += getClass().getProtectionDomain().getCodeSource().getLocation().toString();
-        path = path.substring(6).replace('/', '\\');
 		escribirArchivoSalida(path+fileName1, getAptitudMaxima()); 
 		escribirArchivoSalida(path+fileName2, 200); 
 		ejecutar();
