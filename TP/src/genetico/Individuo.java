@@ -34,7 +34,7 @@ public class Individuo implements Comparable<Object> {
 	}
 
 	public void calcularAptitud() {
-		this.aptitud = Math.pow(this.valor, 2) + 4 * this.valor - 4;
+		this.aptitud = (-1)*Math.pow(this.valor + 8, -1) *Math.sin(this.valor + 8);
 	}
 
 	public void mutar() {
