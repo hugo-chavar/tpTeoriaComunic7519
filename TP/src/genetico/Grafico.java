@@ -26,7 +26,7 @@ public class Grafico {
 	}
 	
 	public void mostrarGrafico(ArrayList<String> aptitudMedia, ArrayList<String> aptitudPeor, ArrayList<String> aptitudMejor){
-		escribirArchivoSalida(path+fileName1, getAptitudMaxima()); 
+		escribirArchivoSalida(path+fileName1, 0.5); 
 		escribirArchivoSalida(path+fileName2, 200); 
 		ejecutar();
 	}
@@ -58,8 +58,8 @@ public class Grafico {
 			 * axis = para cambiar valor minimo y maximo para los ejes
 			 * axis[(valor_minimo_EjeX, valor_maximo_EjeX, valor_minimo_EjeY, valor_maximo_EjeY)]
 			 */
-			String axis = "axis([0,"+cantGeneraciones+",-100,"+limiteAptitudMaximo+"]);\n";
-			output += axis + "xlabel('Generacion');\nylabel('Aptitud');\nlegend('Aptitud Media', 'Aptitud Peor', 'Aptitud Mejor');\n";
+			//String axis = "axis([0,"+cantGeneraciones+",-100,"+limiteAptitudMaximo+"]);\n";
+			output += "xlabel('Generacion');\nylabel('Aptitud');\nlegend('Aptitud Media', 'Aptitud Peor', 'Aptitud Mejor');\n";
 			writer.write(output);
 			writer.close();
 		} catch (IOException e) {
