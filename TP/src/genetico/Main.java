@@ -22,7 +22,7 @@ public class Main {
 		System.out.println();
 
 		// Defino parametros y veo si hay archivo de configuración
-		int cantidadIndividuosEnPoblacion = 10;
+		int cantidadIndividuosEnPoblacion = 100;
 		double tasaDeSeleccion = 0.1; // tasa de reproduccion es el mismo nro
 		double tasaDeMutacion = 0.01;
 		double minimaVariacionEntreGeneraciones = 0.0000001;

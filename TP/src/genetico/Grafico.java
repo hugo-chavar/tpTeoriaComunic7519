@@ -5,14 +5,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Grafico {
 
-	private static final String fileName1 = "graficoEvolucion.m";
-	/*utilizo otra salida donde se cambia el limite maximo del eje, de esa forma
-	 * se aprecia mas la convergencia*/
-	private static final String fileName2 = "graficoEvolucionZoom.m";
+	private static final String fileName = "graficoEvolucion.m";
 	private String path;
 	private ArrayList<String> aptitudMedia;
 	private ArrayList<String> aptitudPeor;
@@ -26,8 +22,7 @@ public class Grafico {
 	}
 	
 	public void mostrarGrafico(ArrayList<String> aptitudMedia, ArrayList<String> aptitudPeor, ArrayList<String> aptitudMejor){
-		escribirArchivoSalida(path+fileName1, 0.5); 
-		escribirArchivoSalida(path+fileName2, 200); 
+		escribirArchivoSalida(path+fileName); 
 		ejecutar();
 	}
 
@@ -37,9 +32,8 @@ public class Grafico {
 	 * 
 	 * @params
 	 * 		fileName = nombre del archivo salida, coindice con el nombre de la funcion
-	 * 		limiteAptitudMaximo = es el valor máximo para el eje y (en este caso aptitud)
 	 */
-	private void escribirArchivoSalida(String fileName, double limiteAptitudMaximo){
+	private void escribirArchivoSalida(String fileName){
 		int cantGeneraciones = aptitudMedia.size();
 		String output = "";
 		BufferedWriter writer = null;
@@ -53,12 +47,7 @@ public class Grafico {
 			//plot = para dibujar el grafico
 			output += "clf;\nplot(generacion, aptitudmedia, '2');\nhold on;\nplot(generacion, aptitudpeor, '3');\n"
 					+ "hold on;\nplot(generacion, aptitudmejor, '1');\nhold on;\n";
-			
-			/*
-			 * axis = para cambiar valor minimo y maximo para los ejes
-			 * axis[(valor_minimo_EjeX, valor_maximo_EjeX, valor_minimo_EjeY, valor_maximo_EjeY)]
-			 */
-			//String axis = "axis([0,"+cantGeneraciones+",-100,"+limiteAptitudMaximo+"]);\n";
+
 			output += "xlabel('Generacion');\nylabel('Aptitud');\nlegend('Aptitud Media', 'Aptitud Peor', 'Aptitud Mejor');\n";
 			writer.write(output);
 			writer.close();
@@ -102,24 +91,6 @@ public class Grafico {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	/* 
-	 * Se obtiene la maxima aptitud generada para poder utilizarla como limite maximo 
-	 * del eje Y (Aptitud). Se lo incrementa en 100 para que se vea bien el limite
-	 */
-	private double getAptitudMaxima(){
-		double aptitudMaximaMedia = Double.parseDouble(aptitudMedia.get(0).replace(",", "."));
-		double aptitudMaximaPeor = Double.parseDouble(aptitudPeor.get(0).replace(",", "."));
-		double aptitudMaximaMejor = Double.parseDouble(aptitudMejor.get(0).replace(",", "."));
-	
-		ArrayList<Double> values = new ArrayList<Double>();
-		values.add(aptitudMaximaMedia);
-		values.add(aptitudMaximaMejor);
-		values.add(aptitudMaximaPeor);
-		
-		Collections.sort(values);
-		return Math.ceil(values.get(values.size()-1)) + 100;
 	}
 	
 	private String getPath(){
